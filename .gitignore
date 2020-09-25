@@ -1,0 +1,6 @@
+ToDo
+.jekyll-cache
+_site
+Gemfile
+Gemfile.lock
+.DS_Store

@@ -1,0 +1,22 @@
+# Setup
+title:               Technical Articles
+tagline:             by Chris Punt
+description:         Chris Punt's Articles
+baseurl:             ''
+paginate:            5
+permalink:           pretty
+markdown: kramdown
+
+# About/contact
+author:
+  name: Chris Punt
+  github_url: https://github.com/cpunt
+  instagram_url: https://www.instagram.com/chrispunt_/
+
+# Gems
+plugins:
+  - jekyll-paginate
+
+# Custom vars
+version:             1.1.0
+google_analytics_id: #UA-XXXX-Y
