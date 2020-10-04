@@ -6,51 +6,40 @@ source: ''
 category: Article
 tags: ['Data Structures', 'Algorithms', 'Linked Lists']
 ---
-## What Is A Linked List?
-A Linked List is a basic computer programming data structure. It is comprised of nodes with each node containing data and an reference to the next node. A Linked list may also have a reference to the previous node if applicable. A Linked List with nodes that have a previous and next reference pointer is called a doubly Linked List. In this article we will be focusing on an singular Linked List, which only has a next reference pointer. The head is the starting point of our Linked List, we will store the reference to this node. The tail is the last node in our Linked List, we know we have reached the tail when the next node is equal to null.
+## What is a Linked List?
+A Linked List is a linear data structure. It is comprised of nodes with each node containing data and an reference to the next node. A Linked List may also have a reference to the previous node if applicable. If the nodes have both a previous and next reference pointer then it is called a Doubly Linked List.
 
-## Why Use A Linked List?
-Linked Lists excel with insertions and deletions, with an average O(1) runtime for these operations. But struggle with instant access operations, with an average O(n) runtime. Linked Lists can also be cheaper to store if we do not know the size of the list. Since nodes in a Linked List store the reference to the next node this means they do not need to be stored contiguously. This is unlike arrays which do need to be stored contiguously. So if we have an expanding list, an array may need to relocate it's memory which can be an expensive operation. But if we know the size of the list it is cheaper to store it in an array. This is because Linked List nodes need to store the reference to the next node, where as items in an array do not. A good use case for a Linked List would be a task which involves a lot of insertions and deletions and doesn't require instant access. Also an expanding list instead of a set list.
+This article will focus on Singular Linked Lists, so a List with only a next reference pointer. The head is the starting point of a Linked List, a reference to the head will be stored. The last node in a Linked List is called the tail. The next pointer of the tail will be null. This shows that there is no more nodes in the List.  
 
-## Implementing A Linked List
-Now we have a basic understanding of what a Linked List is lets implement one. In our code example below we will be using Python:
+## Why Use a Linked List?
+Linked Lists excel at insertions and deletions, with an average O(1) runtime for these operations. But struggle with instant access operations, with an average O(n) runtime. Linked Lists also have potential storage advantages when the size of the input is not predefined. Since nodes in a Linked List store the reference to the next node this means they do not need to be stored contiguously. This is unlike arrays, if the input expands past the array size then the array will need to be relocated which can be expensive.
+
+When the input has a predefined size it may be cheaper to use an array. This is because Linked List nodes need to store the reference to the next node, where as items in an array do not. A good use case for a Linked List would be a task which involves a lot of insertions and deletions and doesn't require instant access. Also an expanding input instead of a set input size.
+
+## Implementing a Linked List
+In the example below I will cover a basic implementation of a Linked List. The code examples will be written in Python:
 ```Python
 class LinkedList:
   def __init__(self, data):
     self.head = Node(data)
-
-  def __repr__(self):
-        node = self.head
-        nodes = []
-        while node is not None:
-            nodes.append(node.data)
-            node = node.next
-        nodes.append("None")
-        return " -> ".join(nodes)
 ```
-First we implement our Linked List class. This class currently has two methods. This init method will initialize the head of our Linked List. We set our head equal to a Node instance passing in our data argument. The repr method is the representation we want our class to display when printed. Now let's take a look at the Node class.
+The Linked List class has one method used to initialize the head. When I set the heads data I create a new Node instance. This class will be used for each node in the Linked List.
 ```Python
 class Node:
   def __init__(self, data):
     self.data = data
     self.next = None
-
-  def __repr__(self):
-    return self.data
 ```
-This class takes the same two methods as our Linked List class. We initialize the Node class by setting our data property equal to our data and the next property equal to None. Next will be our reference to the next node. Now we have the very basics of our Linked List implemented let's use it.
+The Node class also uses the initializer method. It sets two properties data and next. Data is set to the data input and next will be set to None. The next property will contain the next nodes reference.
 ```Python
 list = LinkedList('1')
-node2 = Node('2')
-node3 = Node('3')
-
-list.head.next = node2
-node2.next = node3
-print(list)
+list.head.next =  Node('2')
+list.head.next.next = Node('3')
 ```
-In the code above we create a new Linked List, we then create two other nodes and finally we set the Linked List next references. When we print out list we should get the output *'1->2->3->None'*. This would get very tedious if we had to do this every time we wanted to add an item to our Linked List. In the next section we will look at methods which will add nodes to our Linked Lists.
+The Linked List created above would resemble this *'1->2->3->None'*. Currently the Linked List class has no methods to add nodes, so I have had to set the next references manually. This would get tedious quickly if I continously set the next references like this.
+
 ## Adding Nodes
-In this section we will look at methods we can use to add nodes to our Linked List. We will cover three methods, the first will be adding a node to the tail of our list, the second will be adding a node to the middle of our list and the third method will be adding nodes to the head of our list.
+In this section I will be expanding on the current Linked List class and implementing methods to add nodes. I will be adding three methods to the current class, addToTail, addToHead, and addToIndex.
 ```Python
 def addToTail(self, data):
 	node = self.head
@@ -58,14 +47,14 @@ def addToTail(self, data):
 		node = node.next
 	node.next = Node(data)
 ```
-In this method we traverse our Linked List until we get to the tail of the tree and then add our new node to our tail nodes next property.
+The addToTail method traverses the Linked List until the tail is reached. Once the tail is reached a new node is added creating a new tail.
 ```Python
 def addToHead(self, data):
 	node = Node(data)
 	node.next = self.head
 	self.head = node
 ```
-In this method we create a new node and then set the next property to our current head. We then set the head to our new node.
+In this method the head is set to a new node and the old head is set to the next node in the Linked List.
 ```Python
 def addToIndex(self, data, index):
 	if index == 0:
@@ -83,19 +72,17 @@ def addToIndex(self, data, index):
 	currentNode.next = node
 	return True
 ```
-In our final method we first check for the edge case if the node is 0. We do this because our function will not work for this case, if our index is 0 we call our addToHead method. If our index is not 0 we traverse our Linked List until we reach the node before where we want our new node. If we can't traverse the node to this index we will return False so the user knows this has failed. Once we have reached our desired node we set our new node next property to currentNode next property. We then set our currentNode next property to our new node. We then finally return True. This is so the user knows the add was successful.
+The final method adds a node to a specific index. If the index is set to 0 then the new node will become the head node. If the index is greater than 0 then the Linked List will be traversed until the node before the index is reached. Once reached the new node can be added to the index. If the index can not be reached because the List is to short then False will be returned, indicating to the user the node was not added. If the node is added True will be returned.
 ```
 list = LinkedList('1')
 list.addToTail('2')
 list.addToTail('3')
 list.addToHead('4')
 list.addToIndex('5', 3)
-
-print(list)
 ```
-Now we have all our add functions let's take a look at them in action. In the example above we would expect the output '4 -> 1 -> 2 -> 5 -> 3 -> None'.
+The List above would look like this  '4 -> 1 -> 2 -> 5 -> 3 -> None'.
 ## Removing Nodes
-Now we can add nodes it would be nice to be able to remove nodes which are no longer needed. In this section we will cover the counter parts of adding nodes. So we will cover removing nodes from the tail, head and middle.
+Removing nodes in a Linked List is not to dissimilar to adding nodes. In this section I will implement three more methods to the Linked List class, removeTail,  removeHead and removeIndex.
 ```Python
 def removeTail(self):
 	node = self.head
@@ -108,12 +95,12 @@ def removeTail(self):
 
 		node.next = None
 ```
-In our first method we remove the tail node. We do this by finding the node before the tail node and setting this nodes next property to None.
+The first method removes the tail node in the Linked List. This method traverses the List until the node before the tail is found. Once found the next property is set to None making this node the new tail.
 ```Python
 def removeHead(self):
 	self.head = self.head.next
 ```
-Our second method removes the head node. In this method we simply set the head to the next node.
+The second method removes the head node. In this method the head is simply set to heads next node.
 ```Python
   def removeIndex(self, index):
     if index == 0:
@@ -132,7 +119,7 @@ Our second method removes the head node. In this method we simply set the head t
     node.next = node.next.next
     return True
 ```
-In our final method we remove a select index from our Linked List. If we can not remove the node because it doesn't exist we return False and if the index is removed successfully we return True. This is so the user is aware if the method call was successful or not.
+The final method removes a node at a selected index in the List. If the index does not exist because the List is to short, False will be returned since a node wasn't removed. If the index does exist, True will be returned since the node was removed. This will indicate to the user if the call was successful or not.
 ```Python
 list = LinkedList('1')
 list.addToTail('2')
@@ -144,12 +131,10 @@ list.addToTail('17')
 list.removeTail()
 list.removeHead()
 list.removeIndex(3)
-
-print(list)
 ```
-Let's take a look at our methods in action. When we print our Linked List after using all the methods it would look like this '2 -> 3 -> 4 -> 6 -> None'.
+The Linked List above would look like this  '2 -> 3 -> 4 -> 6 -> None'.
 ## Finding Nodes
-Now we can remove and add nodes what if we want to find if an node exists in our list and return it? This is will be our final method we implement for our Linked List class.
+The final method I'm going to implement is a find method.
 ```Python
 def find(self, data):
 	node = self.head
@@ -160,8 +145,7 @@ def find(self, data):
 
 	return None
 ```
-In our find method we traverse the Linked List checking if each node data is equal to our input data. If we get a match we return the node. If there is no matches we return None.
-## Notes
-Methods should have check to see if Linked List is empty.
-Removing Nodes should return node.data removed.
-Refer to as linear
+The find method traverses the Linked List and checks if the node data is equal to the input data. If it is the matching node is returned. If it does not match then None will be returned, indicating this data is not in the Linked List.
+
+## Summary
+Linked Lists can be a powerful data structure when used in the correct circumstances. Check out these [interview questions](http://) based around Linked List so you can implement a List of your own.
