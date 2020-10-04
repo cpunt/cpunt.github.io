@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linked Lists
-meta: A Linked List is a basic computer programming data structure. It is comprised of nodes with each node containing data and an reference to the next node. A Linked list may also have a reference to the previous node if applicable. A Linked List with nodes that have a previous and next reference pointer is called a doubly Linked List...
+meta: A Linked List is a linear data structure. It is comprised of nodes with each node containing data and an reference to the next node. A Linked List may also have a reference to the previous node if applicable. If the nodes have both a previous and next reference pointer then it is called a Doubly Linked List.
 source: ''
 category: Article
 tags: ['Data Structures', 'Algorithms', 'Linked Lists']
