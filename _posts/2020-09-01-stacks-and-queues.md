@@ -1,28 +1,28 @@
 ---
 layout: post
 title: Stacks and Queues
-meta: In this article we will be covering the data structures stacks and queues. We will learn how to implement both a stack and a queue written in Python. But before we look at code examples let's talk about what a stack and a queue actually is...
+meta: This article will cover Stacks and Queues. Stacks and Queues are very similar, they are both data structures with an average O(1) insert / delete and O(n) access / search...
 posted: 01/09/2020
 source: ''
 category: Article
 tags: ['Data Structures', 'Algorithms', 'Stacks', 'Queues']
 ---
 ## What are Stacks and Queues?
-In this article we will be covering the data structures stacks and queues. We will learn how to implement both a stack and a queue written in Python. But before we look at code examples let's talk about what a stack and a queue actually is.
-<br><br>
-A stack is something we regularly encounter in our day to day lives. An example of a stack would be a pile of plates. When we want a new plate we grab the plate from the top of the stack. When we want to put a plate back this also goes to the top of the stack. This real world example is exactly how stacks work in the computer programming world. When we want to add an item onto our stack, it will be added to the top of our stack. When we want to remove an item from our stack, it will be removed from the top of our stack. We will be referring to these stack methods as push and pop. It is important to remember that stacks work on a last in first out basis.
-<br><br>
-A queue is something we also encounter frequently in real life. An example of a queue would be waiting in line at a supermarket. If you are the first person in the line, you will be the first person to see the cashier and first person to leave. If you join the line you will join at the back. This is how queues are used when we use them in our code. Where queues differ from stacks is that they work on a first in first out basis. So when we push at item onto our queue it will be added to the back of the queue. When we pop at item from our queue the first item will be removed from the queue. Now we have a rough understanding on how queues and stacks work let's look at some code examples.
+This article will cover Stacks and Queues. Stacks and Queues are very similar, they are both data structures with an average O(1) insert / delete and O(n) access / search. Stacks and Queues differ when it comes to how inserts and deletes are handled. Stacks operate in a first in last out manner, whereas Queues are first in first out.
 
-## Stacks
-In this example we will implement a very basic stack class which has the ability to push and pop. You could of course extend on this stack class by adding methods which can return the size of the stack, the top item in the stack, weather of not the stack is empty, etc. Python has built in data structures like queue and deque which can be used as a stack but in this example we will be implementing our own stack class so we understand clearly the inner workings.
+Here's a real world example of a Stack being used: *Imagine there is a pile of plates. When a plate is removed it is removed from the top of the pile. When a plate is added, it is added to the top of the pile*. This example follows a Stacks first in last out pattern. Stacks are a commonly used data structure in computer programming. One example of where a Stack is used in the computing world would be the [Call Stack](https://en.wikipedia.org/wiki/Call_stack).
+
+A real world example of a Queue would be: *There is a single line at a supermarket of people waiting to pay for their items. The first person in the line would get to see the cashier first and be the first person to leave the line. If somebody wanted to join the line they would have to go to the back*. This example follows the Queue pattern of first in first out. Queues are also a commonly used data structure. An example of a Queue being used in programming would be the [Keyboard Buffer](https://en.wikipedia.org/wiki/Keyboard_buffer).
+
+## Stack Example
+In the example below, I will implement a basic Stack class which will have the ability to push (add) and pop (delete) items. For the code examples in this article, I will be using Python. Python does already have built-in Stacks and Queues data structures such as queue and deque. In these examples, I will not be using built-in data structures for the purpose of clearly demonstrating the inner workings of Stacks and Queues.
 ```Python
 class Stack:
   def __init__ (self):
     self.top = None;
 
   def push (self, data):
-    node = StackNode(data)
+    node = Node(data)
 
     if self.top is None:
       self.top = node
@@ -32,16 +32,18 @@ class Stack:
 
   def pop (self):
     if self.top is not None:
+      popped = self.top
       self.top = self.top.next
+      return popped
 ```
-The example above is an example of how to implement a stack. When we initiate our class we set the top property equal to None. This property will keep track of the last node added to our stack. When pushing an item onto our stack this will become our the new value for our top property. When removing an item from our stack the next node will become our new top property. Now let's take a look at StackNode so we know how our stack nodes are formed.
+The Stack class implemented has three methods. The first method initializes the top of the Stack to None. This property will keep track of the node at the top of the Stack. The second method pushes the new node to the top of the Stack. The final method pops the top node off the Stack. Notice when adding a new node the Node class is used. Below is an example of this class.
 ```Python
-class StackNode:
+class Node:
   def __init__ (self, data):
     self.data = data
     self.next = None
 ```
-Our StackNode is the same as a linked list node. Linked lists are perfect to implement a stack because when we push or pop a node from our stack the runtime will always be O(1). If we used an array instead of a linked list our runtime would be O(n). This is because arrays need to be stored contiguously and Linked Lists do not. Let's take a look at our stack in action.
+The Node class creates a Linked Lists structure, keeping reference to the next element. Using a Linked List structure will ensure that delete / insert times will be O(1).
 ```Python
 myStack = Stack()
 myStack.push(8)
@@ -50,10 +52,9 @@ myStack.push(2)
 myStack.push(7)
 myStack.pop()
 ```
-In this example we used our push and pop methods to form our stack. Our end stack would look like this '2 -> 3 -> 8 -> None'.
-
-## Queues
-In this example we are also going to keep our queue class basic with the same methods as our stack class, push and pop. This is a very basic implementation of a queue but it lays the crucial foundations and can easily be built on once implemented.
+The Stack example above would look like this '2 -> 3 -> 8 -> None'.
+## Queue Example
+In the example below I will be implementing a basic Queue class with the same methods as the Stack class featured above, push and pop.
 ```Python
 class Queue:
   def __init__ (self):
@@ -61,7 +62,7 @@ class Queue:
     self.tail = None
 
   def push (self, data):
-    node = QueueNode(data)
+    node = Node(data)
 
     if self.tail is None:
       self.tail = node
@@ -70,14 +71,14 @@ class Queue:
       self.tail.next = node
       self.tail = node
 
-  def pop (self):
+  def shift (self):
     if self.head is not None:
       self.head = self.head.next
 
     if self.head is None:
       self.tail = None
 ```
-In our queue class we initialize two properties, head and tail. The head property will keep track of the start of our queue and the tail property will keep track of the end of our queue. When we push at item onto our queue we update the tail with the new node. When we pop an item from our queue we change the head to the next item in our queue. The QueueNode class is the exact same as our StackNode class in the last example. Now let's take a look at our queue in action.
+The Queue class has three methods. The first method initializes the head and tail properties to None. These properties will store the first and last nodes in the Queue. The second method adds the new Node to the end of the Queue, updating the tail. The final method removes the first item in the Queue, updating the head.
 ```Python
 myQueue = Queue()
 myQueue.push(9)
@@ -87,7 +88,6 @@ myQueue.push(12)
 myQueue.push(4)
 myQueue.pop()
 ```
-In our example our queue would look like this '3 -> 5 -> 12 -> 4 -> None'. Each time we call the pop method it removes the item at the top of the queue. So the next item to be removed would be 5 and so on until None is reached.
-
-## Notes
-Refer to as linear
+The Queue example above would look like this '3 -> 5 -> 12 -> 4 -> None'.
+## Summary
+Stacks and Queues are a core data structure in computer programming which will frequently be seen, so it's best to be familiar with what they are and how they work. If you want to test your knowledge, [hackerrank](https://www.hackerrank.com/domains/data-structures?filters%5Bsubdomains%5D%5B%5D=queues&filters%5Bsubdomains%5D%5B%5D=stacks) and [leetcode](https://leetcode.com/problemset/all/) have some good questions on Stacks and Queues.
