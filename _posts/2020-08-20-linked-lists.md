@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linked Lists
-meta: A Linked List is a data structure that consists of nodes with each node containing data and a reference to the next node. It may also have a reference to the previous node if applicable...
+meta: This article will cover a Linked List. It will include a breakdown of the data structure, why use it, and code examples of a Linked List. 
 posted: 20/08/2020
 source: ''
 category: Article

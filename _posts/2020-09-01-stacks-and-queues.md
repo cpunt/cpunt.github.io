@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Stacks and Queues
-meta: This article will cover Stacks and Queues. Stacks and Queues are very similar, they are both data structures with an average O(1) insert / delete and O(n) access / search...
+meta: This article will cover the data structures Stacks and Queues. This article will contain what a Stack and Queue is and also how to implement the data structures.
 posted: 01/09/2020
 source: ''
 category: Article
