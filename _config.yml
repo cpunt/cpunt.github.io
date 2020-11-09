@@ -1,7 +1,7 @@
 # Setup
 title:               Technical Articles
-tagline:             by Chris Punt
-description:         Chris Punt's Articles
+tagline:             by Christopher Punt
+description:         Christopher Punt's Articles
 baseurl:             ''
 paginate:            5
 permalink:           pretty
@@ -9,7 +9,7 @@ markdown: kramdown
 
 # About/contact
 author:
-  name: Chris Punt
+  name: Christopher Punt
   github_url: https://github.com/cpunt
   instagram_url: https://www.instagram.com/chrispunt_/
 
