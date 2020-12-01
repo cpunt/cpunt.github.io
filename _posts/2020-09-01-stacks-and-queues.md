@@ -18,30 +18,30 @@ A real world example of a Queue would be: *There is a single line at a supermark
 In the example below, I will implement a basic Stack class which will have the ability to push (add) and pop (delete) items. For the code examples in this article, I will be using Python. Python does already have built-in Stacks and Queues data structures such as queue and deque. In these examples, I will not be using built-in data structures for the purpose of clearly demonstrating the inner workings of Stacks and Queues.
 ```Python
 class Stack:
-  def __init__ (self):
-    self.top = None;
+    def __init__ (self):
+        self.top = None;
 
-  def push (self, data):
-    node = Node(data)
+    def push (self, data):
+        node = Node(data)
 
-    if self.top is None:
-      self.top = node
-    else:
-      node.next = self.top
-      self.top = node
+        if self.top is None:
+            self.top = node
+        else:
+            node.next = self.top
+            self.top = node
 
-  def pop (self):
-    if self.top is not None:
-      popped = self.top
-      self.top = self.top.next
-      return popped
+    def pop (self):
+        if self.top is not None:
+            popped = self.top
+            self.top = self.top.next
+            return popped
 ```
 The Stack class implemented has three methods. The first method initializes the top of the Stack to None. This property will keep track of the node at the top of the Stack. The second method pushes the new node to the top of the Stack. The final method pops the top node off the Stack. Notice when adding a new node the Node class is used. Below is an example of this class.
 ```Python
 class Node:
-  def __init__ (self, data):
-    self.data = data
-    self.next = None
+    def __init__ (self, data):
+        self.data = data
+        self.next = None
 ```
 The Node class creates a Linked Lists structure, keeping reference to the next element. Using a Linked List structure will ensure that delete / insert times will be O(1).
 ```Python
@@ -57,26 +57,26 @@ The Stack example above would look like this '2 -> 3 -> 8 -> None'.
 In the example below I will be implementing a basic Queue class with the same methods as the Stack class featured above, push and pop.
 ```Python
 class Queue:
-  def __init__ (self):
-    self.head = None
-    self.tail = None
+    def __init__ (self):
+        self.head = None
+        self.tail = None
 
-  def push (self, data):
-    node = Node(data)
+    def push (self, data):
+        node = Node(data)
 
-    if self.tail is None:
-      self.tail = node
-      self.head = node
-    else:
-      self.tail.next = node
-      self.tail = node
+        if self.tail is None:
+            self.tail = node
+            self.head = node
+        else:
+            self.tail.next = node
+            self.tail = node
 
-  def shift (self):
-    if self.head is not None:
-      self.head = self.head.next
+    def shift (self):
+        if self.head is not None:
+            self.head = self.head.next
 
-    if self.head is None:
-      self.tail = None
+        if self.head is None:
+            self.tail = None
 ```
 The Queue class has three methods. The first method initializes the head and tail properties to None. These properties will store the first and last nodes in the Queue. The second method adds the new Node to the end of the Queue, updating the tail. The final method removes the first item in the Queue, updating the head.
 ```Python
