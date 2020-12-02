@@ -53,6 +53,7 @@ myStack.push(7)
 myStack.pop()
 ```
 The Stack example above would look like this '2 -> 3 -> 8 -> None'.
+
 ## Queue Example
 In the example below I will be implementing a basic Queue class with the same methods as the Stack class featured above, push and pop.
 ```Python
@@ -89,5 +90,6 @@ myQueue.push(4)
 myQueue.pop()
 ```
 The Queue example above would look like this '3 -> 5 -> 12 -> 4 -> None'.
+
 ## Summary
-Stacks and Queues are a core data structure in computer programming which will frequently be seen, so it's best to be familiar with what they are and how they work. If you want to test your knowledge, [hackerrank](https://www.hackerrank.com/domains/data-structures?filters%5Bsubdomains%5D%5B%5D=queues&filters%5Bsubdomains%5D%5B%5D=stacks) and [leetcode](https://leetcode.com/problemset/all/) have some good questions on Stacks and Queues.
+Stacks and Queues are a core data structure in computer programming which will frequently be seen, so it's best to be familiar with what they are and how they work. [Here](https://github.com/cpunt/articles-code-examples/blob/master/stacks-and-queues/main.py) is a link to the code examples in this article. If you want to test your knowledge, [hackerrank](https://www.hackerrank.com/domains/data-structures?filters%5Bsubdomains%5D%5B%5D=queues&filters%5Bsubdomains%5D%5B%5D=stacks) and [leetcode](https://leetcode.com/problemset/all/) have some good questions on Stacks and Queues.
