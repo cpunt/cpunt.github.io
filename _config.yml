@@ -11,7 +11,6 @@ markdown: kramdown
 author:
   name: Christopher Punt
   github_url: https://github.com/cpunt
-  instagram_url: https://www.instagram.com/chrispunt_/
 
 # Gems
 plugins:
